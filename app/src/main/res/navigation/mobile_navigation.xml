@@ -6,20 +6,45 @@
     app:startDestination="@+id/nav_home">
 
     <fragment
+        android:id="@+id/nav_logout"
+        android:name="com.example.tg.ui.logout.LogoutFragment"
+        android:label="@string/menu_logout"
+        tools:layout="@layout/fragment_logout" />
+    <fragment
+        android:id="@+id/nav_admin"
+        android:name="com.example.tg.ui.admin.AdminFragment"
+        android:label="@string/menu_admin"
+        tools:layout="@layout/fragment_admin" />
+    <fragment
+        android:id="@+id/nav_my_profile"
+        android:name="com.example.tg.ui.my_profile.MyProfileFragment"
+        android:label="@string/menu_my_profile"
+        tools:layout="@layout/fragment_my_profile" />
+    <fragment
+        android:id="@+id/nav_games"
+        android:name="com.example.tg.ui.games.GamesFragment"
+        android:label="@string/menu_games"
+        tools:layout="@layout/fragment_games" />
+    <fragment
+        android:id="@+id/nav_guided_walks"
+        android:name="com.example.tg.ui.guided_walks.GuidedWalksFragment"
+        android:label="@string/menu_guided_walks"
+        tools:layout="@layout/fragment_guided_walks" />
+    <fragment
         android:id="@+id/nav_home"
         android:name="com.example.tg.ui.home.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.example.tg.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/nav_map"
+        android:name="com.example.tg.ui.map.MapFragment"
+        android:label="@string/menu_map"
+        tools:layout="@layout/fragment_map" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.example.tg.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_tree_list"
+        android:name="com.example.tg.ui.tree_list.TreeListFragment"
+        android:label="@string/menu_tree_list"
+        tools:layout="@layout/fragment_tree_list" />
 </navigation>
