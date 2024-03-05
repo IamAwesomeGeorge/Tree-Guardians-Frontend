@@ -1,9 +1,9 @@
 <resources>
-    <string name="app_name">tg</string>
+    <string name="app_name">Tree Guardians</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Tree Guardians</string>
-    <string name="nav_header_subtitle">user@email.com</string>
+    <string name="nav_header_title">Firstname Lastname</string>
+    <string name="nav_header_subtitle">Tree Expert</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
