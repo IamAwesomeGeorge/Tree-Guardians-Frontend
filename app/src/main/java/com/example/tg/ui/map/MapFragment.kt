@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.tg.databinding.FragmentMapBinding
+import com.google.android.material.snackbar.Snackbar
 
 class MapFragment : Fragment() {
 
@@ -27,6 +28,11 @@ class MapFragment : Fragment() {
 
         _binding = FragmentMapBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        binding.fab.setOnClickListener { view ->
+            Snackbar.make(view, "Add a tree", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show()
+        }
 
         val textView: TextView = binding.textMap
         MapViewModel.text.observe(viewLifecycleOwner) {
