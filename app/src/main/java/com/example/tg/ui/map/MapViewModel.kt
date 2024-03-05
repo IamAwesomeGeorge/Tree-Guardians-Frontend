@@ -10,4 +10,10 @@ class MapViewModel : ViewModel() {
         value = "This is the Map Fragment"
     }
     val text: LiveData<String> = _text
+
+    private val _more_text = MutableLiveData<String>().apply {
+        value = "This is the Map Fragment"
+    }
+    val text2: LiveData<String> = _more_text
+
 }
