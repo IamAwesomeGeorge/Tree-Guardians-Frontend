@@ -23,7 +23,7 @@ Android application for Tree Guardians (CK Futures). The user interface to bridg
  - Select a tree
  - Take user input
  - Send user input to API
- - Inform user of API response (success/unsuccess)
+ - Inform user of API response (successful/unsuccessful)
 ## TREE-34
 *As a user I want a Task bar / buttons so that I can easily navigate around the app.*
  - Use template
