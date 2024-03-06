@@ -42,3 +42,6 @@ Android application for Tree Guardians (CK Futures). The user interface to bridg
  - API fetches tree info
  - Display info
  - Multiple pictures can be viewed
+
+# CREDITS
+<a href="https://www.flaticon.com/free-icons/christmas-tree" title="christmas tree icons">Christmas tree icons created by Pixel perfect - Flaticon</a>
