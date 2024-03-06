@@ -7,12 +7,18 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.tg.R
 import com.example.tg.databinding.FragmentMapBinding
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.MapView
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.material.snackbar.Snackbar
 
-class MapFragment : Fragment() {
+class MapFragment : Fragment(), OnMapReadyCallback {
 
     private var _binding: FragmentMapBinding? = null
+    private lateinit var googleMap: GoogleMap
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -33,7 +39,7 @@ class MapFragment : Fragment() {
             Snackbar.make(view, "Add a tree", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
-/*
+
         val textView: TextView = binding.textMap
 
         MapViewModel.text.observe(viewLifecycleOwner) {
@@ -44,12 +50,20 @@ class MapFragment : Fragment() {
         MapViewModel.text2.observe(viewLifecycleOwner) {
             textView2.text = it
         }
-  */
+
+        val mapView = root.findViewById<MapView>(R.id.map)
+        mapView.getMapAsync(this)
+
+
         return root
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onMapReady(p0: GoogleMap) {
+        googleMap = p0
     }
 }
