@@ -40,16 +40,6 @@ class MapFragment : Fragment(), OnMapReadyCallback {
                 .setAction("Action", null).show()
         }
 
-        val textView: TextView = binding.textMap
-
-        MapViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
-
-        val textView2: TextView = binding.textMap2
-        MapViewModel.text2.observe(viewLifecycleOwner) {
-            textView2.text = it
-        }
 
         val mapView = root.findViewById<MapView>(R.id.map)
         mapView.getMapAsync(this)
