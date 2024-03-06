@@ -33,7 +33,7 @@ class MapFragment : Fragment() {
             Snackbar.make(view, "Add a tree", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
-
+/*
         val textView: TextView = binding.textMap
 
         MapViewModel.text.observe(viewLifecycleOwner) {
@@ -44,6 +44,7 @@ class MapFragment : Fragment() {
         MapViewModel.text2.observe(viewLifecycleOwner) {
             textView2.text = it
         }
+  */
         return root
     }
 
