@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.tg.R
 import com.example.tg.databinding.FragmentTreeListBinding
 
 class TreeListFragment : Fragment() {
@@ -18,21 +19,24 @@ class TreeListFragment : Fragment() {
     private val binding get() = _binding!!
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        val TreeListViewModel =
-            ViewModelProvider(this).get(TreeListViewModel::class.java)
+    ): View? {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_tree_list, container, false)
+    }
 
-        _binding = FragmentTreeListBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        val textView: TextView = binding.textTreeList
-        TreeListViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+        val numbersTextView = view.findViewById<TextView>(R.id.numbersTextView)
+
+        val numbersList = mutableListOf<String>()
+        for (i in 1..100) {
+            numbersList.add("Tree #" + i.toString() + "🌳")
         }
-        return root
+
+        numbersTextView.text = numbersList.joinToString("\n")
     }
 
     override fun onDestroyView() {
