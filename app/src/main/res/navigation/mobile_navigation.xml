@@ -31,11 +31,6 @@
         android:name="com.example.tg.ui.guided_walks.GuidedWalksFragment"
         android:label="@string/menu_guided_walks"
         tools:layout="@layout/fragment_guided_walks" />
-    <fragment
-        android:id="@+id/nav_home"
-        android:name="com.example.tg.ui.home.HomeFragment"
-        android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/nav_map"
