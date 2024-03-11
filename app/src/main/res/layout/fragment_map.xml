@@ -34,7 +34,7 @@
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_baseline_add_location_alt_24"
+        app:srcCompat="@drawable/ic_baseline_add_24"
         android:contentDescription="@string/map_icon" />
 
 
