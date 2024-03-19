@@ -20,6 +20,10 @@
     <string name="map_image">Map Image</string>
     <string name="title_activity_maps">MapsActivity</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment ADD TREE!!!</string>
+    <string name="location_text">Waiting for permission…</string>
     <string name="add_tree">Add Tree</string>
+    <string name="location_permission_needed">Location Permission Needed</string>
+    <string name="location_permission_alert_msg">This app requires your location to get the tree location</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
 </resources>
