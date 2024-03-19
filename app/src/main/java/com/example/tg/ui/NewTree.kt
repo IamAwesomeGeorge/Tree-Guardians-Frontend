@@ -77,7 +77,7 @@ class NewTree : Fragment(R.layout.fragment_new_tree) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        view.findViewById<FloatingActionButton>(R.id.fab).setOnClickListener {
+        view.findViewById<FloatingActionButton>(R.id.add_tree_fab).setOnClickListener {
             // Przenieś użytkownika do nowej aktywności lub fragmentu, gdzie będzie mógł robić zdjęcia
             val intent = Intent(activity, NewTree::class.java)
             startActivity(intent)

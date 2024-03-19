@@ -17,6 +17,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.tg.R
 import com.example.tg.databinding.FragmentMapBinding
 import com.example.tg.ui.NewTree
@@ -47,7 +48,7 @@ class MapFragment : Fragment() {
         val binding = FragmentMapBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        binding.fab.setOnClickListener { view ->
+        binding.addTreeFab.setOnClickListener { view ->
             addTree(view)
         }
 
@@ -166,12 +167,9 @@ class MapFragment : Fragment() {
     }
 
     private fun addTree(view: View) {
-        // Implement your function logic here
+        // Get location and move to new page
         checkLocationPermissions()
-
-
-        // For example:
-
+        findNavController().navigate(R.id.add_tree_fab)
     }
 
 
