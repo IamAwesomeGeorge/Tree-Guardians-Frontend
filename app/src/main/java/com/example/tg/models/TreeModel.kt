@@ -1,4 +1,4 @@
-package models
+package com.example.tg.models
 
 import kotlin.properties.Delegates
 
@@ -15,8 +15,5 @@ public class TreeModel {
     private var planted: String by Delegates.notNull<String>()
     private var height: Int by Delegates.notNull<Int>()
     private var is_deleted: Boolean by Delegates.notNull<Boolean>()
-
-
-
 
 }
