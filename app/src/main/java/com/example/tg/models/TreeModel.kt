@@ -1,19 +1,21 @@
 package com.example.tg.models
+import com.google.gson.annotations.SerializedName
 
-import kotlin.properties.Delegates
 
-public class TreeModel {
-    private var id: Int by Delegates.notNull<Int>()
-
-    private var creation_date: String by Delegates.notNull<String>()
-    private var id_user: Int by Delegates.notNull<Int>()
-    private var species: String by Delegates.notNull<String>()
-    private var latitude: Double by Delegates.notNull<Double>()
-    private var longitude: Double by Delegates.notNull<Double>()
-    private var health_status: String by Delegates.notNull<String>()
-    private var circumference: Double by Delegates.notNull<Double>()
-    private var planted: String by Delegates.notNull<String>()
-    private var height: Int by Delegates.notNull<Int>()
-    private var is_deleted: Boolean by Delegates.notNull<Boolean>()
-
-}
+// This model defines the tree object which we will use in the application and uses
+// the SerializedName annotation to convert from JSON to a java object.
+data class TreeModel(
+    @SerializedName("id") val id: Int,
+    @SerializedName("creation_date") val creationDate: String,
+    @SerializedName("id_user") val idUser: Int,
+    @SerializedName("species") val species: String,
+    @SerializedName("latitude") val latitude: Double,
+    @SerializedName("longitude") val longitude: Double,
+    @SerializedName("health_status") val healthStatus: String,
+    @SerializedName("circumference") val circumference: Double,
+    @SerializedName("planted") val planted: String,
+    @SerializedName("height") val height: Int,
+    @SerializedName("is_deleted") val isDeleted: Int // MySql is storing as TinyInt not Boolean
+    // We could consider building a custom deserializer to correctly convert tiny int
+    // to Java Boolean - Tom
+)
