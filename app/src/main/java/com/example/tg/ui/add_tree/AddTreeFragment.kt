@@ -1,13 +1,20 @@
 package com.example.tg.ui.add_tree
 
 import android.Manifest
+import android.app.Activity
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.provider.MediaStore
+import android.provider.MediaStore.Video.Media
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.tg.R
@@ -15,6 +22,7 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.IntentCompat
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -33,6 +41,9 @@ class AddTreeFragment : Fragment() {
 
     private lateinit var locationOutputTextView: TextView
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private lateinit var get_location_btn: Button
+    private lateinit var get_camera_btn: Button
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +51,11 @@ class AddTreeFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
+
     }
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,7 +64,46 @@ class AddTreeFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_add_tree, container, false)
         locationOutputTextView = view.findViewById(R.id.location_output)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+        get_location_btn = view.findViewById(R.id.get_location_btn)
+        get_camera_btn = view.findViewById(R.id.get_camera_btn)
+
+                // Set OnClickListener and define logic inside onClick
+        get_location_btn.setOnClickListener {
+            // Your function or logic goes here
+            // For example:
+            getLastLocation()
+            // TODO: add feature here
+        }
+
+        /*get_camera_btn.setOnClickListener {
+            if (ContextCompat.checkSelfPermission(
+                    requireContext(),
+                Manifest.permission.CAMERA
+                ) == PackageManager.PERMISSION_GRANTED
+            ) {
+                val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                resultLauncher.launch(intent)
+            } else {
+                ActivityCompat.requestPermissions(
+                    requireActivity(),
+                    arrayOf(Manifest.permission.CAMERA),
+                    CAMERA_PERMISSION_CODE
+                )
+            }
+        }*/
+
+
         return view
+    }
+
+    val requestPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted ->
+        if (isGranted) {
+            Log.d("PERMISSIONS", "GRANTED")
+        } else {
+            Log.d("PERMISSIONS", "DENIED")
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -58,6 +112,8 @@ class AddTreeFragment : Fragment() {
     }
 
     private fun getLastLocation() {
+        var lat: Double = 0.0
+        var lon: Double = 0.0
         if (ActivityCompat.checkSelfPermission(
                 requireContext(),
                 Manifest.permission.ACCESS_FINE_LOCATION
@@ -74,13 +130,19 @@ class AddTreeFragment : Fragment() {
         fusedLocationClient.lastLocation
             .addOnSuccessListener { location ->
                 if (location != null) {
-                    locationOutputTextView.text = "Latitude: ${location.latitude}, Longitude: ${location.longitude}"
+                    lat = location.latitude
+                    lon = location.longitude
+                    locationOutputTextView.text = "Latitude: ${lat}, Longitude: ${lon}"
                 } else {
-                    locationOutputTextView.text = "Location not available"
+                    lat = 0.0
+                    lon = 0.0
+                    locationOutputTextView.text = "Latitude: 0.0, Longitude: 0.0"
                 }
             }
             .addOnFailureListener { exception ->
-                locationOutputTextView.text = "Error getting location: ${exception.message}"
+                lat = 0.0
+                lon = 0.0
+                locationOutputTextView.text = "Latitude: 0.0, Longitude: 0.0"
             }
     }
 
@@ -102,6 +164,9 @@ class AddTreeFragment : Fragment() {
          * @return A new instance of fragment AddTree.
          */
         // TODO: Rename and change types and number of parameters
+
+        private const val CAMERA_PERMISSION_CODE = 1
+        private const val CAMERA = 2
 
         private const val LOCATION_PERMISSION_REQUEST_CODE = 1001
         @JvmStatic

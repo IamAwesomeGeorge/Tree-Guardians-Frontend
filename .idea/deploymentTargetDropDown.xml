@@ -3,10 +3,20 @@
   <component name="deploymentTargetDropDown">
     <value>
       <entry key="Tree Guardians">
-        <State />
-      </entry>
-      <entry key="app">
-        <State />
+        <State>
+          <runningDeviceTargetSelectedWithDropDown>
+            <Target>
+              <type value="RUNNING_DEVICE_TARGET" />
+              <deviceKey>
+                <Key>
+                  <type value="SERIAL_NUMBER" />
+                  <value value="RFCWC138BFD" />
+                </Key>
+              </deviceKey>
+            </Target>
+          </runningDeviceTargetSelectedWithDropDown>
+          <timeTargetWasSelectedWithDropDown value="2024-03-29T09:30:33.901369800Z" />
+        </State>
       </entry>
     </value>
   </component>

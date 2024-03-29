@@ -26,4 +26,6 @@
     <string name="location_permission_alert_msg">This app requires your location to get the tree location</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
+    <string name="button">Get Location</string>
+    <string name="get_camera_btn">Get Camera</string>
 </resources>
