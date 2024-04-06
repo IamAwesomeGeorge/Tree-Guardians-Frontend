@@ -4,6 +4,7 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
 import android.provider.MediaStore.Video.Media
@@ -13,6 +14,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
@@ -43,6 +45,7 @@ class AddTreeFragment : Fragment() {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var get_location_btn: Button
     private lateinit var get_camera_btn: Button
+    private lateinit var image_preview: ImageView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,6 +69,9 @@ class AddTreeFragment : Fragment() {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         get_location_btn = view.findViewById(R.id.get_location_btn)
         get_camera_btn = view.findViewById(R.id.get_camera_btn)
+        image_preview = view.findViewById(R.id.camera_preview)
+
+
 
                 // Set OnClickListener and define logic inside onClick
         get_location_btn.setOnClickListener {
@@ -73,6 +79,26 @@ class AddTreeFragment : Fragment() {
             // For example:
             getLastLocation()
             // TODO: add feature here
+        }
+
+        if (ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.CAMERA
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.CAMERA), 100)
+        } else {
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                arrayOf(Manifest.permission.CAMERA),
+                CAMERA_PERMISSION_CODE
+            )
+        }
+
+        get_camera_btn.setOnClickListener{
+            var intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(intent, 100);
+
         }
 
         /*get_camera_btn.setOnClickListener {
@@ -95,6 +121,15 @@ class AddTreeFragment : Fragment() {
 
         return view
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 100) {
+            var bitmap = data?.extras?.get("data")
+            image_preview.setImageBitmap(bitmap as Bitmap?)
+        }
+    }
+
 
     val requestPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
