@@ -72,6 +72,8 @@ class MapFragment : Fragment() {
             val mainOak1 = LatLng(51.88697515090959, -2.0899243290533973)
             val mainOakSnippet1 = "Height: 12m | Diameter: 0.5m | Not Healthy"
 
+            /* This is where we need to add the code to */
+
 
             googleMap.addMarker(MarkerOptions()
                 .position(mainOak)

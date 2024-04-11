@@ -9,4 +9,5 @@ interface ApiService {
     @GET("tree")
     // Previously used TreeModel but this caused errors parsing the http status code
     fun getAllTrees(): Call<TreeResponse>
+
 }
