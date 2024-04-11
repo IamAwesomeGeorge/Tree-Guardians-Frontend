@@ -64,6 +64,7 @@ class MapFragment : Fragment() {
             val resizedMarkerBitmap = Bitmap.createScaledBitmap(customMarkerBitmap, 128, 128, false)
 
 
+
             // Use the TreeRepository Class to fetch data relating to trees
             treeRepository = TreeRepository()
             treeRepository.getAllTrees(object : TreeDataCallback {
