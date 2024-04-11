@@ -11,33 +11,32 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.tg.R
 import com.example.tg.databinding.FragmentMapBinding
-import com.example.tg.ui.NewTree
+import com.example.tg.models.TreeModel
+import com.example.tg.repositories.TreeDataCallback
+import com.example.tg.repositories.TreeRepository
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.MapView
-import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import com.google.android.material.snackbar.Snackbar
+
 
 class MapFragment : Fragment() {
 
     private var _binding: FragmentMapBinding? = null
     private lateinit var googleMap: GoogleMap
+    private lateinit var treeRepository: TreeRepository
+    // This is the main tree that will be used to zoom the camera when the map opens
+    //private var mainTree: TreeModel? = null
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+    // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -65,32 +64,39 @@ class MapFragment : Fragment() {
             val resizedMarkerBitmap = Bitmap.createScaledBitmap(customMarkerBitmap, 128, 128, false)
 
 
-            // Add a marker at a specific location (optional)
-            val mainOak = LatLng(51.88805651189536, -2.088274256170261)
-            val mainOakSnippet = "Height: 24m | Diameter: 1.5m | Healthy"
 
-            val mainOak1 = LatLng(51.88697515090959, -2.0899243290533973)
-            val mainOakSnippet1 = "Height: 12m | Diameter: 0.5m | Not Healthy"
+            // Use the TreeRepository Class to fetch data relating to trees
+            treeRepository = TreeRepository()
+            treeRepository.getAllTrees(object : TreeDataCallback {
+                override fun onSuccess(trees: List<TreeModel>) {
+                    activity?.runOnUiThread {
+                        val mainTree = trees.firstOrNull()
+                        for (tree in trees) {
+                            val position = LatLng(tree.latitude, tree.longitude)
+                            val snippet = "Height: ${tree.height} | Diameter: ${tree.circumference} | ${tree.healthStatus}"
 
-            /* This is where we need to add the code to */
+                            googleMap.addMarker(MarkerOptions()
+                                .position(position)
+                                .title(tree.species)
+                                .snippet(snippet)
+                                .icon(BitmapDescriptorFactory.fromBitmap(resizedMarkerBitmap))
+                            )
+                        }
 
+                        // Move the camera to the location of the first tree (If it exists)
+                        mainTree?.let {
+                            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
+                                LatLng(it.latitude, it.longitude), 12f))
+                        }
+                    }
+                }
 
-            googleMap.addMarker(MarkerOptions()
-                .position(mainOak)
-                .title("Oak Tree")
-                .snippet(mainOakSnippet)
-                .icon(BitmapDescriptorFactory.fromBitmap(resizedMarkerBitmap))
-            )
+                override fun onError(errorMessage: String) {
+                    // Handle error
+                    Log.e("Tree Fetch Error", errorMessage)
+                }
+            })
 
-            googleMap.addMarker(MarkerOptions()
-                .position(mainOak1)
-                .title("Ash Tree")
-                .snippet(mainOakSnippet1)
-                .icon(BitmapDescriptorFactory.fromBitmap(resizedMarkerBitmap))
-            )
-
-            // Move the camera to a specific location with zoom level (optional)
-            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mainOak, 12f))
         }
 
         return root
