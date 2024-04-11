@@ -6,18 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.example.tg.R
-import com.example.tg.api.RetrofitClient
 import com.example.tg.databinding.FragmentTreeListBinding
 import com.example.tg.models.TreeModel
-// Retrofit HTTP client for API calls
-import retrofit2.Response
-import retrofit2.Call
-import retrofit2.Callback
 // Logging
 import android.util.Log
-import com.example.tg.models.TreeResponse
 import com.example.tg.repositories.TreeDataCallback
 import com.example.tg.repositories.TreeRepository
 
