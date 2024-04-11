@@ -40,16 +40,9 @@ class TreeListFragment : Fragment() {
         treeRepository = TreeRepository()
         treeRepository.getAllTrees(object : TreeDataCallback {
             override fun onSuccess(trees: List<TreeModel>) {
-
                 val recyclerView = view.findViewById<RecyclerView>(R.id.treesRecyclerView)
                 recyclerView.layoutManager = LinearLayoutManager(context)
                 recyclerView.adapter = TreeListAdapter(trees)
-
-                /*val numbersList = trees.mapIndexed { index, treeModel ->
-                    "${index + 1}: ${treeModel.species}, ${treeModel.healthStatus} 🌳"
-                }
-                view.findViewById<TextView>(R.id.numbersTextView).text = numbersList.joinToString("\n")
-                 */
             }
 
             override fun onError(errorMessage: String) {
