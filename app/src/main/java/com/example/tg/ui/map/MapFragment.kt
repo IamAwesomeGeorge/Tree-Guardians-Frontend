@@ -33,8 +33,6 @@ class MapFragment : Fragment() {
     private var _binding: FragmentMapBinding? = null
     private lateinit var googleMap: GoogleMap
     private lateinit var treeRepository: TreeRepository
-    // This is the main tree that will be used to zoom the camera when the map opens
-    //private var mainTree: TreeModel? = null
 
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!

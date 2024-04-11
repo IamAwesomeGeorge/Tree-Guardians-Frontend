@@ -26,4 +26,9 @@
     <string name="location_permission_alert_msg">This app requires your location to get the tree location</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
+    <string name="tree_details_format">Height: %1$s | Circumference: %2$s | Status: %3$s</string>
+
+    <!-- This formatting can be changed later,
+    we can perhaps use a photo of the leaf from each tree-->
+    <string name="tree_species_format">%1$s 🌳</string>
 </resources>
