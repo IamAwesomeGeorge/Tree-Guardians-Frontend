@@ -36,4 +36,6 @@ class TreeRepository {
             }
         })
     }
+
+    // Will need additional functions for GET, POST, PUT AND DELETE
 }

@@ -35,7 +35,7 @@
         android:contentDescription="@string/map_icon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_baseline_add_24" />
+        app:srcCompat="@drawable/ic_add_tree" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

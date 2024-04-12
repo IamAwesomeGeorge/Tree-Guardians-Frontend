@@ -10,4 +10,6 @@ interface ApiService {
     // Previously used TreeModel but this caused errors parsing the http status code
     fun getAllTrees(): Call<TreeResponse>
 
+    // Need to add additional methods such as POST, PUT AND DELETE
+
 }
