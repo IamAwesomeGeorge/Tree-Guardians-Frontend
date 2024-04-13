@@ -76,6 +76,10 @@ dependencies {
     // Location services
     implementation("com.google.android.gms:play-services-location:21.2.0")
 
+    // Chartlton Kings area boundary
+    implementation ("com.google.maps.android:android-maps-utils:2.2.3")
+
+
     // AndroidX - Implementation Testing
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
