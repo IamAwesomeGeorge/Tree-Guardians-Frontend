@@ -49,4 +49,100 @@
         app:layout_constraintTop_toBottomOf="@+id/location_output"
         tools:src="@tools:sample/backgrounds/scenic" />
 
+    <SeekBar
+        android:id="@+id/seekBar"
+        style="@style/Widget.AppCompat.SeekBar.Discrete"
+        android:layout_width="260dp"
+        android:layout_height="19dp"
+        android:max="10"
+        android:progress="5"
+        app:layout_constraintBottom_toTopOf="@+id/location_output"
+        app:layout_constraintEnd_toEndOf="@+id/camera_preview"
+        app:layout_constraintTop_toBottomOf="@+id/get_location_btn" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/health"
+        app:layout_constraintBottom_toBottomOf="@+id/seekBar"
+        app:layout_constraintEnd_toStartOf="@+id/seekBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/seekBar" />
+
+    <EditText
+        android:id="@+id/editTextNumberDecimal"
+        android:layout_width="100dp"
+        android:layout_height="0dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        android:text="12"
+        app:layout_constraintBottom_toTopOf="@+id/get_location_btn"
+        app:layout_constraintEnd_toStartOf="@+id/get_camera_btn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/get_camera_btn" />
+
+    <EditText
+        android:id="@+id/editTextNumberDecimal2"
+        android:layout_width="100dp"
+        android:layout_height="0dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        android:text="12"
+        app:layout_constraintBottom_toTopOf="@+id/get_location_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/get_camera_btn"
+        app:layout_constraintTop_toBottomOf="@+id/get_camera_btn" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/height_circ"
+        app:layout_constraintBottom_toTopOf="@+id/get_location_btn"
+        app:layout_constraintEnd_toStartOf="@+id/editTextNumberDecimal2"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toEndOf="@+id/editTextNumberDecimal"
+        app:layout_constraintTop_toBottomOf="@+id/get_camera_btn"
+        app:layout_constraintVertical_bias="0.352" />
+
+    <EditText
+        android:id="@+id/editTextText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/get_camera_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/species"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextText"
+        app:layout_constraintEnd_toStartOf="@+id/editTextText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/editTextText" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="@string/unhealthy"
+        app:layout_constraintBottom_toTopOf="@+id/seekBar"
+        app:layout_constraintStart_toStartOf="@+id/seekBar" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="@string/healthy"
+        app:layout_constraintBottom_toTopOf="@+id/seekBar"
+        app:layout_constraintEnd_toEndOf="@+id/seekBar" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
