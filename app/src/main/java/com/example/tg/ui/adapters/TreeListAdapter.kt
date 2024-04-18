@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.tg.R
 import com.example.tg.models.TreeModel
 
-class TreeListAdapter(private val trees: List<TreeModel>) : RecyclerView.Adapter<TreeListAdapter.ViewHolder>() {
+class TreeListAdapter(private var trees: List<TreeModel>) : RecyclerView.Adapter<TreeListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_tree, parent, false)
@@ -22,6 +22,11 @@ class TreeListAdapter(private val trees: List<TreeModel>) : RecyclerView.Adapter
     }
 
     override fun getItemCount(): Int = trees.size
+
+    fun updateData(filteredTrees: List<TreeModel>) {
+        trees = filteredTrees
+        notifyDataSetChanged()
+    }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val treeSpeciesTextView: TextView = itemView.findViewById(R.id.treeSpeciesTextView)
