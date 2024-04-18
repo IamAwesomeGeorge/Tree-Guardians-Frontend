@@ -45,8 +45,8 @@
         tools:layout="@layout/fragment_tree_list" />
 
     <fragment
-        android:id="@+id/add_tree_fab"
+        android:id="@+id/add_tree_fab_start"
         android:name="com.example.tg.ui.add_tree.AddTreeFragment"
         android:label="@string/add_tree"
-        tools:layout="@layout/fragment_add_tree" />
+        tools:layout="@layout/fragment_add_tree_location" />
 </navigation>

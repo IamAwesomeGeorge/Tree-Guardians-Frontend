@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.add_tree.AddTreeFragment">
@@ -8,8 +10,139 @@
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:id="@+id/location_output"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/location_text" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/location_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <Button
+        android:id="@+id/location_get_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:rotationY="0"
+        android:text="@string/button"
+        app:layout_constraintBottom_toTopOf="@+id/location_output"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/image_add_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/get_camera_btn"
+        app:layout_constraintBottom_toTopOf="@+id/location_get_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/camera_preview"
+        android:layout_width="289dp"
+        android:layout_height="217dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/location_output"
+        tools:src="@tools:sample/backgrounds/scenic" />
+
+    <SeekBar
+        android:id="@+id/health_input_metadata"
+        style="@style/Widget.AppCompat.SeekBar.Discrete"
+        android:layout_width="260dp"
+        android:layout_height="19dp"
+        android:max="10"
+        android:progress="5"
+        app:layout_constraintBottom_toTopOf="@+id/location_output"
+        app:layout_constraintEnd_toEndOf="@+id/camera_preview"
+        app:layout_constraintTop_toBottomOf="@+id/location_get_btn" />
+
+    <TextView
+        android:id="@+id/health_label_main_metadata"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/health"
+        app:layout_constraintBottom_toBottomOf="@+id/health_input_metadata"
+        app:layout_constraintEnd_toStartOf="@+id/health_input_metadata"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/health_input_metadata" />
+
+    <EditText
+        android:id="@+id/height_input_metadata"
+        android:layout_width="100dp"
+        android:layout_height="0dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        android:text="12"
+        app:layout_constraintBottom_toTopOf="@+id/location_get_btn"
+        app:layout_constraintEnd_toStartOf="@+id/image_add_btn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image_add_btn" />
+
+    <EditText
+        android:id="@+id/circ_input_metadata"
+        android:layout_width="100dp"
+        android:layout_height="0dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        android:text="12"
+        app:layout_constraintBottom_toTopOf="@+id/location_get_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/image_add_btn"
+        app:layout_constraintTop_toBottomOf="@+id/image_add_btn" />
+
+    <TextView
+        android:id="@+id/height_label_metadata"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/height_circ"
+        app:layout_constraintBottom_toTopOf="@+id/location_get_btn"
+        app:layout_constraintEnd_toStartOf="@+id/circ_input_metadata"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toEndOf="@+id/height_input_metadata"
+        app:layout_constraintTop_toBottomOf="@+id/image_add_btn"
+        app:layout_constraintVertical_bias="0.352" />
+
+    <EditText
+        android:id="@+id/species_input_metadata"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/image_add_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/species_label_metadata"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/species"
+        app:layout_constraintBottom_toBottomOf="@+id/species_input_metadata"
+        app:layout_constraintEnd_toStartOf="@+id/species_input_metadata"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/species_input_metadata" />
+
+    <TextView
+        android:id="@+id/health_label_high_metadata"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="@string/unhealthy"
+        app:layout_constraintBottom_toTopOf="@+id/health_input_metadata"
+        app:layout_constraintStart_toStartOf="@+id/health_input_metadata" />
+
+    <TextView
+        android:id="@+id/health_label_low_metadata"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="@string/healthy"
+        app:layout_constraintBottom_toTopOf="@+id/health_input_metadata"
+        app:layout_constraintEnd_toEndOf="@+id/health_input_metadata" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
