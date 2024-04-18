@@ -147,7 +147,8 @@ class AddTreeFragment : Fragment(), LocationUpdateListener {
 
         get_location_btn.setOnClickListener {
             // Create an instance of MyLocationListener
-            Location.getLastLocation(requireContext(), this)
+            //THIS IS THROWING ERRORS
+            //Location.getLastLocation(requireContext(), this)
         }
 
         return root

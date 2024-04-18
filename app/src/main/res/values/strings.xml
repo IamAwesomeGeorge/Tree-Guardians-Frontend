@@ -42,4 +42,10 @@
     <string name="previous">PREVIOUS</string>
     <string name="add_images_of_your_new_tree">Add images of your new tree</string>
     <string name="finish">Finish</string>
+
+    <!-- Formatting for tree list -->
+    <string name="tree_details_format">Height: %1$s | Circumference: %2$s | Status: %3$s</string>
+    <!-- This formatting can be changed later,
+    we can perhaps use a photo of the leaf from each tree-->
+    <string name="tree_species_format">%1$s 🌳</string>
 </resources>
