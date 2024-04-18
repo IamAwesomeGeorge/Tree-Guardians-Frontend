@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.tg.R
 import com.example.tg.databinding.FragmentTreeListBinding
 import com.example.tg.models.TreeModel
 // Logging
@@ -13,7 +12,6 @@ import android.util.Log
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.tg.repositories.TreeDataCallback
 import com.example.tg.repositories.TreeRepository
 import com.example.tg.ui.adapters.TreeListAdapter
