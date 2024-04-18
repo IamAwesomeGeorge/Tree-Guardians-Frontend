@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.add_tree.AddTreeFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <SeekBar
+        android:id="@+id/health_input_metadata"
+        style="@style/Widget.AppCompat.SeekBar.Discrete"
+        android:layout_width="260dp"
+        android:layout_height="19dp"
+        android:layout_marginTop="32dp"
+        android:max="10"
+        android:progress="5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/health_label_main_metadata" />
+
+    <TextView
+        android:id="@+id/health_label_main_metadata"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/health"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/circ_input_metadata" />
+
+    <EditText
+        android:id="@+id/height_input_metadata"
+        android:layout_width="100dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="32dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        android:text="12"
+        app:layout_constraintStart_toStartOf="@+id/species_input_metadata"
+        app:layout_constraintTop_toBottomOf="@+id/species_input_metadata" />
+
+    <EditText
+        android:id="@+id/circ_input_metadata"
+        android:layout_width="100dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="32dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        android:text="12"
+        app:layout_constraintStart_toStartOf="@+id/height_input_metadata"
+        app:layout_constraintTop_toBottomOf="@+id/height_input_metadata" />
+
+    <TextView
+        android:id="@+id/height_label_metadata"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/height"
+        app:layout_constraintBottom_toBottomOf="@+id/height_input_metadata"
+        app:layout_constraintEnd_toStartOf="@+id/height_input_metadata"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/height_input_metadata" />
+
+    <TextView
+        android:id="@+id/circ_label_metadata"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/circumferance"
+        app:layout_constraintBottom_toBottomOf="@+id/circ_input_metadata"
+        app:layout_constraintEnd_toStartOf="@+id/circ_input_metadata"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/circ_input_metadata" />
+
+    <EditText
+        android:id="@+id/species_input_metadata"
+        android:layout_width="0dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="32dp"
+        android:ems="10"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="@+id/metadata_request_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/metadata_request_subtitle" />
+
+    <TextView
+        android:id="@+id/species_label_metadata"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/species"
+        app:layout_constraintBottom_toBottomOf="@+id/species_input_metadata"
+        app:layout_constraintEnd_toStartOf="@+id/species_input_metadata"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/species_input_metadata" />
+
+    <TextView
+        android:id="@+id/health_label_high_metadata"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="@string/healthy"
+        app:layout_constraintBottom_toTopOf="@+id/health_input_metadata"
+        app:layout_constraintEnd_toEndOf="@+id/health_input_metadata" />
+
+    <TextView
+        android:id="@+id/health_label_low_metadata"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="@string/unhealthy"
+        app:layout_constraintBottom_toTopOf="@+id/health_input_metadata"
+        app:layout_constraintStart_toStartOf="@+id/health_input_metadata" />
+
+    <TextView
+        android:id="@+id/metadata_request_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:fontFamily="sans-serif"
+        android:text="@string/please_enter_more_details_about_the_tree"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/metadata_request_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/don_t_worry_if_you_cant_enter_everything"
+        app:layout_constraintStart_toStartOf="@+id/metadata_request_title"
+        app:layout_constraintTop_toBottomOf="@+id/metadata_request_title" />
+
+    <Button
+        android:id="@+id/metadata_next_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="80dp"
+        android:text="@string/next"
+        app:layout_constraintBottom_toBottomOf="@+id/metadata_prev_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/metadata_prev_btn" />
+
+    <Button
+        android:id="@+id/metadata_prev_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="100dp"
+        android:text="@string/previous"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/health_input_metadata" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
