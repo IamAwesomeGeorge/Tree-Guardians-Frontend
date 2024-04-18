@@ -169,7 +169,7 @@ class MapFragment : Fragment() {
     private fun addTree(view: View) {
         // Get location and move to new page
         checkLocationPermissions()
-        findNavController().navigate(R.id.add_tree_fab)
+        findNavController().navigate(R.id.add_tree_fab_start)
     }
 
 

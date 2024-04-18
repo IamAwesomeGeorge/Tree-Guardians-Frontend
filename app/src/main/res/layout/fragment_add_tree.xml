@@ -30,7 +30,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/get_camera_btn"
+        android:id="@+id/image_add_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/get_camera_btn"
@@ -78,9 +78,9 @@
         android:inputType="numberDecimal"
         android:text="12"
         app:layout_constraintBottom_toTopOf="@+id/location_get_btn"
-        app:layout_constraintEnd_toStartOf="@+id/get_camera_btn"
+        app:layout_constraintEnd_toStartOf="@+id/image_add_btn"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/get_camera_btn" />
+        app:layout_constraintTop_toBottomOf="@+id/image_add_btn" />
 
     <EditText
         android:id="@+id/circ_input_metadata"
@@ -91,8 +91,8 @@
         android:text="12"
         app:layout_constraintBottom_toTopOf="@+id/location_get_btn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/get_camera_btn"
-        app:layout_constraintTop_toBottomOf="@+id/get_camera_btn" />
+        app:layout_constraintStart_toEndOf="@+id/image_add_btn"
+        app:layout_constraintTop_toBottomOf="@+id/image_add_btn" />
 
     <TextView
         android:id="@+id/height_label_metadata"
@@ -103,7 +103,7 @@
         app:layout_constraintEnd_toStartOf="@+id/circ_input_metadata"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toEndOf="@+id/height_input_metadata"
-        app:layout_constraintTop_toBottomOf="@+id/get_camera_btn"
+        app:layout_constraintTop_toBottomOf="@+id/image_add_btn"
         app:layout_constraintVertical_bias="0.352" />
 
     <EditText
@@ -112,7 +112,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/get_camera_btn"
+        app:layout_constraintBottom_toTopOf="@+id/image_add_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

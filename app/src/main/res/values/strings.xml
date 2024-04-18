@@ -27,7 +27,7 @@
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
     <string name="button">Get Location</string>
-    <string name="get_camera_btn">Get Camera</string>
+    <string name="get_camera_btn">Take a picture</string>
     <string name="health">Health</string>
     <string name="height_circ">Height | Circ</string>
     <string name="species">Species</string>
@@ -40,4 +40,6 @@
     <string name="please_enter_more_details_about_the_tree">Please enter more details about the tree:</string>
     <string name="don_t_worry_if_you_cant_enter_everything">Don\'t worry if you cant enter everything</string>
     <string name="previous">PREVIOUS</string>
+    <string name="add_images_of_your_new_tree">Add images of your new tree</string>
+    <string name="finish">Finish</string>
 </resources>
