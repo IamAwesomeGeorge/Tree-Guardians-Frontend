@@ -33,4 +33,11 @@
     <string name="species">Species</string>
     <string name="unhealthy">Unhealthy</string>
     <string name="healthy">Healthy</string>
+    <string name="please_walk_to_the_base_of_the_tree_nthen_press_get_location">Please walk to the base of the tree\nThen press GET LOCATION</string>
+    <string name="next">NEXT</string>
+    <string name="circumferance">Circumferance</string>
+    <string name="height">Height</string>
+    <string name="please_enter_more_details_about_the_tree">Please enter more details about the tree:</string>
+    <string name="don_t_worry_if_you_cant_enter_everything">Don\'t worry if you cant enter everything</string>
+    <string name="previous">PREVIOUS</string>
 </resources>
