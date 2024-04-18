@@ -6,13 +6,48 @@
     android:layout_height="match_parent"
     tools:context=".ui.tree_list.TreeListFragment">
 
+    <!-- Dropdown for Species -->
+    <Spinner
+        android:id="@+id/spinnerSpecies"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:entries="@array/species_options"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/spinnerHeight"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_chainStyle="spread"/>
+
+    <!-- Dropdown for Height -->
+    <Spinner
+        android:id="@+id/spinnerHeight"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:entries="@array/height_options"
+        app:layout_constraintStart_toEndOf="@id/spinnerSpecies"
+        app:layout_constraintEnd_toStartOf="@id/spinnerProximity"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <!-- Dropdown for Proximity -->
+    <Spinner
+        android:id="@+id/spinnerProximity"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:entries="@array/proximity_options"
+        app:layout_constraintStart_toEndOf="@id/spinnerHeight"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/treesRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/spinnerSpecies"
         app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

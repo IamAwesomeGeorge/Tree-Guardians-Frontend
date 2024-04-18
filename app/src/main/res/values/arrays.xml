@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="species_options">
+        <item>Species</item>
+        <item>Oak</item>
+        <item>Maple</item>
+    </string-array>
+    <string-array name="height_options">
+        <item>Height</item>
+        <item>&gt; 5m</item>
+        <item>&lt; 5m</item>
+    </string-array>
+    <string-array name="proximity_options">
+        <item>Proximity</item>
+        <item>100m</item>
+        <item>200m</item>
+        <item>300m</item>
+        <item>400m</item>
+        <item>500m</item>
+    </string-array>
+</resources>
