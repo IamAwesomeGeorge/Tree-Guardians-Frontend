@@ -1,6 +1,5 @@
 package com.example.tg.ui.add_tree
 
-import GetLocation
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
@@ -12,14 +11,12 @@ import android.widget.Button
 import com.example.tg.R
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import Location
+import android.util.Log
 import com.example.tg.databinding.FragmentAddTreeLocationBinding
-import com.example.tg.databinding.FragmentMapBinding
 import com.google.android.gms.maps.MapView
 
 // TODO: Rename parameter arguments, choose names that match
@@ -110,7 +107,7 @@ class AddTreeFragment : Fragment(), LocationUpdateListener {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val binding = FragmentAddTreeLocationBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
@@ -145,11 +142,12 @@ class AddTreeFragment : Fragment(), LocationUpdateListener {
 
 
 
-        get_location_btn.setOnClickListener {
+        //get_location_btn.setOnClickListener {
             // Create an instance of MyLocationListener
             //THIS IS THROWING ERRORS
             //Location.getLastLocation(requireContext(), this)
-        }
+
+        //}
 
         return root
     }
