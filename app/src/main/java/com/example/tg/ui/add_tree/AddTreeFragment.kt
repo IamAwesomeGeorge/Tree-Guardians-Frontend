@@ -113,7 +113,7 @@ class AddTreeFragment : Fragment(), LocationUpdateListener {
 
         addTreeMapFragment = root.findViewById<MapView>(R.id.add_tree_map)
 
-        addTreeMapFragment?.let {
+        addTreeMapFragment.let {
             it.onCreate(savedInstanceState)
             it.getMapAsync { addTreeGoogleMap ->
                 // Configure the map here
@@ -162,7 +162,7 @@ class AddTreeFragment : Fragment(), LocationUpdateListener {
         val newLocation = LatLng(newLat, newLon)
 
         // Check if googleMap is not null
-        addTreeMapFragment?.let {
+        addTreeMapFragment.let {
             it.getMapAsync { addTreeGoogleMap ->
                 // Clear existing markers
                 addTreeGoogleMap.clear()
