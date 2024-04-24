@@ -88,4 +88,8 @@ dependencies {
     // UI Dependencies
     implementation("androidx.cardview:cardview:1.0.0")
 
+    // Async coroutines
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+
 }

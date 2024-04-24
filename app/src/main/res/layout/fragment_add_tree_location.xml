@@ -36,7 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="200dp"
-        android:text="@string/please_walk_to_the_base_of_the_tree_nthen_press_get_location"
+        android:text="@string/walk_to_base_msg"
         android:textAlignment="center"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"

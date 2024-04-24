@@ -1,40 +1,16 @@
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat.requireContext
-import com.example.tg.R
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.MapView
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
 
-// Define the LocationListener interface
-interface LocationListener {
-    fun onLocationReceived(lat: Double, lon: Double)
-    fun moveMarkerAndCamera(lat: Double, lon: Double)
-}
+import kotlinx.coroutines.*
 
-class GetLocation : LocationListener {
-    override fun onLocationReceived(lat: Double, lon: Double) {
-        // This method will be called when location is received
-        Log.d("LOCATION", "Received location: $lat, $lon")
 
-        // Call moveMarkerAndCamera with the received location
-        moveMarkerAndCamera(lat, lon)
-    }
-
-    override fun moveMarkerAndCamera(lat: Double, lon: Double) {
-        Log.d("TEMP", "MOVE MAP TO LOCATION: $lat, $lon")
-    }
-}
 
 object Location {
     public val DEFAULT_LAT = 51.88201959762641
@@ -43,11 +19,12 @@ object Location {
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
-    // Function to get the last known location
-    public fun getLastLocation(context: Context, listener: LocationListener) {
-        var lat: Double = this.DEFAULT_LAT
-        var lon: Double = this.DEFAULT_LON
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(context as AppCompatActivity)
+    suspend fun fetchLocation(context: Context, fusedLocationClient: FusedLocationProviderClient): Pair<Double, Double> = coroutineScope{
+        // Permission already granted, get last location
+        var lat: Double = DEFAULT_LAT
+        var lon: Double = DEFAULT_LON
+
+        val deferred = CompletableDeferred<Pair<Double, Double>>()
 
         if (ActivityCompat.checkSelfPermission(
                 context,
@@ -61,23 +38,31 @@ object Location {
                 LOCATION_PERMISSION_REQUEST_CODE
             )
         }
-        // Permission already granted, get last location
+
+
+
         fusedLocationClient.lastLocation
             .addOnSuccessListener { location ->
                 if (location != null) {
                     lat = location.latitude
                     lon = location.longitude
-
-                    Log.d("LOCATION", "Got location $lat, $lon")
-                    listener.onLocationReceived(lat, lon)
+                    deferred.complete(Pair(lat, lon))
+                } else {
+                    deferred.complete(Pair(DEFAULT_LAT, DEFAULT_LON))
                 }
             }
             .addOnFailureListener { exception ->
-                lat = this.DEFAULT_LAT
-                lon = this.DEFAULT_LON
-                Log.d("LOCATION", "Fail location $lat, $lon")
-                listener.onLocationReceived(lat, lon)
+                deferred.complete(Pair(DEFAULT_LAT, DEFAULT_LON))
             }
+
+        deferred.await()
+    }
+
+    // Function to get the last known location
+    public suspend fun getLastLocation(context: Context): Pair<Double, Double> {
+        val fusedLocationClient =
+            LocationServices.getFusedLocationProviderClient(context as AppCompatActivity)
+        return fetchLocation(context, fusedLocationClient)
     }
 }
 

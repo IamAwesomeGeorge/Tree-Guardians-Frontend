@@ -11,10 +11,12 @@ import com.example.tg.models.TreeModel
 import android.util.Log
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tg.repositories.TreeDataCallback
 import com.example.tg.repositories.TreeRepository
 import com.example.tg.ui.adapters.TreeListAdapter
+import kotlinx.coroutines.launch
 
 class TreeListFragment : Fragment() {
     private var _binding: FragmentTreeListBinding? = null // Declare the binding
@@ -104,6 +106,21 @@ class TreeListFragment : Fragment() {
         val speciesFilter = binding.spinnerSpecies.selectedItem.toString()
         val heightFilter = binding.spinnerHeight.selectedItem.toString()
         val proximityFilter = binding.spinnerProximity.selectedItem.toString()
+        var latitude: Double = 0.0
+        var longitude: Double = 0.0
+
+        lifecycleScope.launch {
+            try {
+                var (lat, lon) = Location.getLastLocation(requireContext())
+                latitude = lat
+                longitude = lon
+                Log.d("LOCTEST", "LOCATION RECEIVED: $lat $lon")
+            } catch (e: Exception) {
+                Log.e("LOCTEST", "ERROR IN LOCATION, $e")
+            }
+        }
+
+        Log.d("LOCTEST", "LOCATION RECEIVED: $latitude $longitude")
 
         val filteredList = allTrees.filter { tree ->
             val matchesSpecies = speciesFilter == "Species" || tree.species == speciesFilter.uppercase()

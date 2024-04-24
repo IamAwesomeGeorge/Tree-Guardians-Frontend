@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName
 data class TreeModel(
     @SerializedName("id") val id: Int,
     @SerializedName("creation_date") val creationDate: String,
-    @SerializedName("id_user") val idUser: Int,
+    @SerializedName("id_user") val idUser: String,
     @SerializedName("species") val species: String,
     @SerializedName("latitude") val latitude: Double,
     @SerializedName("longitude") val longitude: Double,
