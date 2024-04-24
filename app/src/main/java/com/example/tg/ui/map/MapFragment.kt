@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.location.LocationManager
 import android.os.Bundle
 import android.util.Log
@@ -26,9 +27,11 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.maps.android.data.geojson.GeoJsonFeature
 import org.json.JSONObject
 import com.google.maps.android.data.geojson.GeoJsonLayer // GeoJsonLayer Class for area boundary on google maps
-
+import com.google.maps.android.data.geojson.GeoJsonPolygon
+import com.google.maps.android.data.geojson.GeoJsonPolygonStyle
 
 
 class MapFragment : Fragment() {
@@ -92,12 +95,26 @@ class MapFragment : Fragment() {
         return root
     }
 
+
+
     private fun loadGeoJson(fileName: String) {
         try {
             val inputStream = context?.assets?.open(fileName)
             val jsonString = inputStream?.bufferedReader().use { it?.readText() }
-            val layer = GeoJsonLayer(googleMap, JSONObject(jsonString))
-            layer.addLayerToMap()
+            val geoJson = GeoJsonLayer(googleMap, JSONObject(jsonString))
+
+            // Style the polygon
+            val polygonStyle = GeoJsonPolygonStyle().apply {
+                fillColor = Color.parseColor("#80FF0000") // Set fill color with transparency
+                strokeColor = Color.TRANSPARENT // Make stroke color transparent
+            }
+
+            // Apply the style to all polygons in the layer
+            geoJson.features.forEach { feature ->
+                feature.polygonStyle = polygonStyle
+            }
+
+            geoJson.addLayerToMap()
         } catch (e: Exception) {
             Log.e("MapFragment", "Error loading GeoJSON: ${e.localizedMessage}")
         }
