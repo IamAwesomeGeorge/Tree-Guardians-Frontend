@@ -64,6 +64,11 @@ object Location {
             LocationServices.getFusedLocationProviderClient(context as AppCompatActivity)
         return fetchLocation(context, fusedLocationClient)
     }
+
+    fun check_location(lat:Double, lon:Double): Boolean {
+        // TODO: Check if the location is within the boundary
+        return true
+    }
 }
 
 

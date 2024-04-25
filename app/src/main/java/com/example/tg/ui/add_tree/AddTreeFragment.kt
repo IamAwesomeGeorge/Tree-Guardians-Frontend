@@ -32,6 +32,9 @@ class AddTreeFragment : Fragment(), LocationUpdateListener {
 
     private lateinit var addTreeMapFragment: MapView
 
+    private var location_lat:Double = 51.88201959762641
+    private var location_lon:Double = -2.0511212095032993
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // Add any initialization logic here
@@ -74,6 +77,9 @@ class AddTreeFragment : Fragment(), LocationUpdateListener {
         }
 
         get_location_btn = binding.root.findViewById<Button>(R.id.location_get_btn)
+        next_btn = binding.root.findViewById<Button>(R.id.location_next_btn)
+
+        next_btn.isEnabled = false
 
 
 
@@ -83,7 +89,7 @@ class AddTreeFragment : Fragment(), LocationUpdateListener {
                 try {
                     val (lat, lon) = Location.getLastLocation(requireContext())
                     Log.d("LOCTEST", "LOCATION RECEIVED: $lat $lon")
-                    moveMarkerAndCamera(lat, lon)
+                    locationSet(lat, lon)
                 } catch (e: Exception) {
                     Log.e("LOCTEST", "ERROR IN LOCATION, $e")
                 }
@@ -91,6 +97,17 @@ class AddTreeFragment : Fragment(), LocationUpdateListener {
         }
 
         return root
+    }
+
+    private fun locationSet(lat: Double, lon: Double) {
+        moveMarkerAndCamera(lat, lon)
+        location_lat = lat
+        location_lon = lon
+
+        if(location_lat != 51.88201959762641 && location_lon != -2.0511212095032993) {
+            if (Location.check_location(location_lat, location_lon))
+            next_btn.isEnabled = true
+        }
     }
 
 
