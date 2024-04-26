@@ -16,24 +16,24 @@
         android:paddingStart="2dp"
         android:paddingEnd="2dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/spinnerHeight"
+        app:layout_constraintEnd_toStartOf="@id/spinnerHealth"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintWidth_percent="0.45"/>
+        app:layout_constraintWidth_percent="0.35"/>
 
     <!-- Dropdown for Height -->
     <Spinner
-        android:id="@+id/spinnerHeight"
+        android:id="@+id/spinnerHealth"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:entries="@array/height_options"
+        android:entries="@array/health_options"
         android:paddingStart="2dp"
         android:paddingEnd="2dp"
         app:layout_constraintStart_toEndOf="@id/spinnerSpecies"
         app:layout_constraintEnd_toStartOf="@id/spinnerProximity"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.25"/>
+        app:layout_constraintWidth_percent="0.35"/>
 
     <!-- Dropdown for Proximity -->
     <Spinner
@@ -44,7 +44,7 @@
         android:entries="@array/proximity_options"
         android:paddingStart="2dp"
         android:paddingEnd="2dp"
-        app:layout_constraintStart_toEndOf="@id/spinnerHeight"
+        app:layout_constraintStart_toEndOf="@id/spinnerHealth"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent="0.30"/>

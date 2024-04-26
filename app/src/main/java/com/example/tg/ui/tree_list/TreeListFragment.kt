@@ -57,7 +57,7 @@ class TreeListFragment : Fragment() {
             override fun onNothingSelected(parent: AdapterView<*>) {}
         }
 
-        binding.spinnerHeight.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        binding.spinnerHealth.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
 
                 if (view != null) {
@@ -85,6 +85,7 @@ class TreeListFragment : Fragment() {
                 allTrees = trees
                 treeListAdapter.updateData(trees)
                 setSpeciesSpinner()
+                setHealthSpinner()
             }
 
             override fun onError(errorMessage: String) {
@@ -96,15 +97,24 @@ class TreeListFragment : Fragment() {
     private fun setSpeciesSpinner() {
         //Updates the Species Spinner to include all unique species
         val speciesUnique = allTrees.map { it.species }.toSet().toList().sorted()
-        val speciesValues = listOf("Species") + speciesUnique
+        val speciesValues = listOf("All Species") + speciesUnique
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, speciesValues)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinnerSpecies.adapter = adapter
     }
 
+    private fun setHealthSpinner() {
+        //Updates the Species Spinner to include all unique species
+        val healthUnique = allTrees.map { it.healthStatus }.toSet().toList().sorted()
+        val healthValues = listOf("All Statuses") + healthUnique
+        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, healthValues)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.spinnerHealth.adapter = adapter
+    }
+
     private fun filterTrees() {
         val speciesFilter = binding.spinnerSpecies.selectedItem.toString()
-        val heightFilter = binding.spinnerHeight.selectedItem.toString()
+        val healthFilter = binding.spinnerHealth.selectedItem.toString()
         val proximityFilter = binding.spinnerProximity.selectedItem.toString()
         var latitude: Double = 0.0
         var longitude: Double = 0.0
@@ -123,7 +133,9 @@ class TreeListFragment : Fragment() {
         Log.d("LOCTEST", "LOCATION RECEIVED: $latitude $longitude")
 
         val filteredList = allTrees.filter { tree ->
-            val matchesSpecies = speciesFilter == "Species" || tree.species == speciesFilter.uppercase()
+            val matchesSpecies =
+                (speciesFilter == "All Species" || tree.species == speciesFilter.uppercase()) &&
+                        (healthFilter == "All Statuses" || tree.healthStatus == healthFilter.uppercase())
             matchesSpecies
         }
         treeListAdapter.updateData(filteredList)
