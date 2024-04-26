@@ -105,7 +105,7 @@ class MapFragment : Fragment() {
 
             // Style the polygon
             val polygonStyle = GeoJsonPolygonStyle().apply {
-                fillColor = Color.parseColor("#80FF0000") // Set fill color with transparency
+                fillColor = Color.parseColor("#70565756") // Set fill color with transparency
                 strokeColor = Color.TRANSPARENT // Make stroke color transparent
             }
 
