@@ -1,6 +1,4 @@
 package com.example.tg.ui.add_tree_metadata
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,13 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import com.example.tg.R
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import Location
 import android.util.Log
+import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -23,8 +18,13 @@ import com.example.tg.databinding.FragmentAddTreeMetadataBinding
 import com.google.android.gms.maps.MapView
 import kotlinx.coroutines.launch
 import androidx.fragment.app.viewModels
+import com.example.tg.models.SpeciesModel
 import com.example.tg.models.TreeAdditionModel
-
+import com.example.tg.models.TreeModel
+import com.example.tg.repositories.SpeciesDataCallback
+import com.example.tg.repositories.SpeciesRepository
+import com.example.tg.repositories.TreeDataCallback
+import com.example.tg.repositories.TreeRepository
 
 
 class AddTreeMetadataFragment : Fragment() {
@@ -35,6 +35,7 @@ class AddTreeMetadataFragment : Fragment() {
     private lateinit var species_spinner: Spinner
 
     private lateinit var addTreeMapFragment: MapView
+    private lateinit var speciesRepository: SpeciesRepository
 
     private var location_lat:Double = 51.88201959762641
     private var location_lon:Double = -2.0511212095032993
@@ -63,6 +64,7 @@ class AddTreeMetadataFragment : Fragment() {
 
         next_btn = binding.root.findViewById<Button>(R.id.metadata_next_btn)
         prev_btn = binding.root.findViewById<Button>(R.id.metadata_prev_btn)
+        species_spinner = binding.root.findViewById<Spinner>(R.id.spinnerSpecies)
 
         // Get spinner
 
@@ -73,6 +75,20 @@ class AddTreeMetadataFragment : Fragment() {
         val bundle = Bundle()
         bundle.putSerializable("locationPair", pair)
         findNavController().previousBackStackEntry?.savedStateHandle?.set("bundle_key", bundle)
+
+        speciesRepository = SpeciesRepository()
+        speciesRepository.getAllSpecies(object : SpeciesDataCallback {
+            override fun onSuccess(species: List<SpeciesModel>) {
+                val speciesUnique = species.map { it.species }.toSet().toList().filter { it != "UNKNOWN" }
+                val speciesValues = listOf("UNKNOWN") + speciesUnique
+                val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, speciesValues)
+                binding.spinnerSpecies.adapter = adapter
+            }
+
+            override fun onError(errorMessage: String) {
+                Log.e("Tree Fetch Error", errorMessage)
+            }
+        })
 
 
 
@@ -86,7 +102,7 @@ class AddTreeMetadataFragment : Fragment() {
 
 
 
-        next_btn.isEnabled = false
+
 
 
 

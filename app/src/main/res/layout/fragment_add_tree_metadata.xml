@@ -9,26 +9,13 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <SeekBar
-        android:id="@+id/health_input_metadata"
-        style="@style/Widget.AppCompat.SeekBar.Discrete"
-        android:layout_width="260dp"
-        android:layout_height="19dp"
-        android:layout_marginTop="32dp"
-        android:max="10"
-        android:progress="5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/health_label_main_metadata" />
-
     <TextView
         android:id="@+id/health_label_main_metadata"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="48dp"
         android:text="@string/health"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/circ_label_metadata"
         app:layout_constraintTop_toBottomOf="@+id/circ_input_metadata" />
 
     <EditText
@@ -38,7 +25,7 @@
         android:layout_marginTop="32dp"
         android:ems="10"
         android:inputType="numberDecimal"
-        android:text="12"
+        android:text="1.0"
         app:layout_constraintStart_toStartOf="@+id/spinnerSpecies"
         app:layout_constraintTop_toBottomOf="@+id/spinnerSpecies" />
 
@@ -49,7 +36,7 @@
         android:layout_marginTop="32dp"
         android:ems="10"
         android:inputType="numberDecimal"
-        android:text="12"
+        android:text="1.0"
         app:layout_constraintStart_toStartOf="@+id/height_input_metadata"
         app:layout_constraintTop_toBottomOf="@+id/height_input_metadata" />
 
@@ -96,24 +83,6 @@
         app:layout_constraintTop_toTopOf="@+id/spinnerSpecies" />
 
     <TextView
-        android:id="@+id/health_label_high_metadata"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="@string/healthy"
-        app:layout_constraintBottom_toTopOf="@+id/health_input_metadata"
-        app:layout_constraintEnd_toEndOf="@+id/health_input_metadata" />
-
-    <TextView
-        android:id="@+id/health_label_low_metadata"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="@string/unhealthy"
-        app:layout_constraintBottom_toTopOf="@+id/health_input_metadata"
-        app:layout_constraintStart_toStartOf="@+id/health_input_metadata" />
-
-    <TextView
         android:id="@+id/metadata_request_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -148,9 +117,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="128dp"
         android:text="@string/previous"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/health_input_metadata" />
+        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/health_label_main_metadata"
+        app:layout_constraintStart_toStartOf="@+id/circ_input_metadata"
+        app:layout_constraintTop_toTopOf="@+id/health_label_main_metadata" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

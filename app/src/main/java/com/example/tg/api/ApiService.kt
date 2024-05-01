@@ -1,4 +1,5 @@
 package com.example.tg.api
+import com.example.tg.models.SpeciesResponse
 import com.example.tg.models.TreeResponse
 import retrofit2.Call
 import retrofit2.http.GET
@@ -11,5 +12,9 @@ interface ApiService {
     fun getAllTrees(): Call<TreeResponse>
 
     // Need to add additional methods such as POST, PUT AND DELETE
+
+
+    @GET("species")
+    fun getSpecies(): Call<SpeciesResponse>
 
 }

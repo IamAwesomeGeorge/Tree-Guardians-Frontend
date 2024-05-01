@@ -4,4 +4,5 @@ import androidx.lifecycle.ViewModel
 
 class TreeAdditionModel : ViewModel() {
     var locationPair: Pair<Double, Double>? = null
+
 }
