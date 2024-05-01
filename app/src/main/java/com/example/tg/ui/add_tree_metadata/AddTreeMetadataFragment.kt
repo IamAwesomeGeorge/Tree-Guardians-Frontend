@@ -15,6 +15,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import Location
 import android.util.Log
+import android.widget.Spinner
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.tg.databinding.FragmentAddTreeLocationBinding
@@ -31,6 +32,7 @@ class AddTreeMetadataFragment : Fragment() {
     private lateinit var get_location_btn: Button
     private lateinit var next_btn: Button
     private lateinit var prev_btn: Button
+    private lateinit var species_spinner: Spinner
 
     private lateinit var addTreeMapFragment: MapView
 
@@ -61,6 +63,8 @@ class AddTreeMetadataFragment : Fragment() {
 
         next_btn = binding.root.findViewById<Button>(R.id.metadata_next_btn)
         prev_btn = binding.root.findViewById<Button>(R.id.metadata_prev_btn)
+
+        // Get spinner
 
 
 
