@@ -11,6 +11,7 @@ import Location
 import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.tg.databinding.FragmentAddTreeLocationBinding
@@ -22,6 +23,7 @@ import com.example.tg.databinding.FragmentAddTreeImagesBinding
 import com.example.tg.models.SpeciesModel
 import com.example.tg.models.TreeAdditionModel
 import com.example.tg.models.TreeModel
+import com.example.tg.models.TreeResponse
 import com.example.tg.repositories.SpeciesDataCallback
 import com.example.tg.repositories.SpeciesRepository
 import com.example.tg.repositories.TreeDataCallback
@@ -115,10 +117,21 @@ class AddTreeImagesFragment : Fragment() {
         )
 
         treeRepository = TreeRepository()
-        treeRepository.createTree(treeData) {
-            result ->
-                result.onSucess {}
-        }
+        treeRepository.createTree(treeData, object : TreeDataCallback {
+            override fun onSuccess(trees: List<TreeModel>) {
+                activity?.runOnUiThread {
+                    Toast.makeText(context, "Tree added successfully!", Toast.LENGTH_SHORT).show()
+                    // Add navigation back to map page
+                }
+            }
+
+            override fun onError(errorMessage: String) {
+                activity?.runOnUiThread {
+                    Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
+                }
+            }
+        })
+    }
 
     }
 
