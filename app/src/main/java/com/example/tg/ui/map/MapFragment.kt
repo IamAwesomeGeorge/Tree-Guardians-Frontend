@@ -180,7 +180,7 @@ class MapFragment : Fragment() {
     }
 
     private fun addTree(view: View) {
-        checkLocationPermissions()
+        //checkLocationPermissions()
         findNavController().navigate(R.id.add_tree_fab)
     }
 }

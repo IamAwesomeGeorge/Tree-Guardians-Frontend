@@ -17,9 +17,14 @@ import com.google.android.gms.maps.model.MarkerOptions
 import Location
 import android.util.Log
 import androidx.lifecycle.lifecycleScope
-import com.example.tg.databinding.FragmentAddTreeLocationBinding
+import androidx.navigation.fragment.findNavController
+//import com.example.tg.databinding.FragmentAddTreeLocationBinding
 import com.google.android.gms.maps.MapView
 import kotlinx.coroutines.launch
+import com.example.tg.models.TreeAdditionModel
+import androidx.lifecycle.ViewModel
+import androidx.fragment.app.viewModels
+import com.example.tg.databinding.FragmentAddTreeLocationBinding
 
 interface LocationUpdateListener {
     fun onLocationUpdate(lat: Double, lon: Double)
@@ -46,10 +51,14 @@ class AddTreeFragment : Fragment(), LocationUpdateListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         val binding = FragmentAddTreeLocationBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        val viewModel: TreeAdditionModel by viewModels()
+
         addTreeMapFragment = root.findViewById<MapView>(R.id.add_tree_map)
+
 
         addTreeMapFragment.let {
             it.onCreate(savedInstanceState)
@@ -81,6 +90,14 @@ class AddTreeFragment : Fragment(), LocationUpdateListener {
 
         next_btn.isEnabled = false
 
+        val pair_initial = Pair(location_lat, location_lon)
+        val bundle = Bundle()
+        bundle.putSerializable("locationPair", pair_initial)
+
+        next_btn.setOnClickListener {
+            findNavController().navigate(R.id.location_next_btn, bundle)
+        }
+
 
 
 
@@ -96,6 +113,30 @@ class AddTreeFragment : Fragment(), LocationUpdateListener {
             }
         }
 
+        val pair = viewModel.locationPair // Assuming you have a ViewModel
+
+
+        val navBackStackEntry = findNavController().getBackStackEntry(R.id.add_tree_fab)
+        val handle = navBackStackEntry.savedStateHandle
+
+
+        pair?.let { (lat, lon) ->
+            location_lat = lat as Double
+            location_lon = lon as Double
+            Log.d("PASSTHROUGH", "LOCATION PASSED: $lat $lon")
+            locationSet(location_lat, location_lon)
+        }
+
+        arguments?.let {
+            val pairPrevious = it.getSerializable("locationPair") as? Pair<*, *>
+            pairPrevious?.let { (lat, lon) ->
+                location_lat = lat as Double
+                location_lon = lon as Double
+                Log.d("PASSTHROUGH", "LOCATION PASSED: $lat $lon")
+                locationSet(location_lat, location_lon)
+            }
+        }
+
         return root
     }
 
@@ -105,9 +146,25 @@ class AddTreeFragment : Fragment(), LocationUpdateListener {
         location_lon = lon
 
         if(location_lat != 51.88201959762641 && location_lon != -2.0511212095032993) {
-            if (Location.check_location(location_lat, location_lon))
-            next_btn.isEnabled = true
+            if (Location.check_location(location_lat, location_lon)) {
+                next_btn.isEnabled = true
+                val pair = Pair(lat, lon)
+                val bundle = Bundle()
+                bundle.putSerializable("locationPair", pair)
+                next_btn.setOnClickListener {
+                    findNavController().navigate(R.id.location_next_btn, bundle)
+                }
+            }
         }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val navBackStackEntry = findNavController().getBackStackEntry(R.id.add_tree_fab)
+        val handle = navBackStackEntry.savedStateHandle
+
+
     }
 
 

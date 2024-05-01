@@ -39,8 +39,8 @@
         android:ems="10"
         android:inputType="numberDecimal"
         android:text="12"
-        app:layout_constraintStart_toStartOf="@+id/species_input_metadata"
-        app:layout_constraintTop_toBottomOf="@+id/species_input_metadata" />
+        app:layout_constraintStart_toStartOf="@+id/spinnerSpecies"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerSpecies" />
 
     <EditText
         android:id="@+id/circ_input_metadata"
@@ -73,14 +73,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/circ_input_metadata" />
 
-    <EditText
-        android:id="@+id/species_input_metadata"
+    <Spinner
+        android:id="@+id/spinnerSpecies"
         android:layout_width="0dp"
         android:layout_height="42dp"
         android:layout_marginStart="140dp"
         android:layout_marginTop="32dp"
         android:ems="10"
-        android:inputType="text"
+        android:entries="@array/species_options"
         app:layout_constraintEnd_toEndOf="@+id/metadata_request_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/metadata_request_subtitle" />
@@ -90,10 +90,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/species"
-        app:layout_constraintBottom_toBottomOf="@+id/species_input_metadata"
-        app:layout_constraintEnd_toStartOf="@+id/species_input_metadata"
+        app:layout_constraintBottom_toBottomOf="@+id/spinnerSpecies"
+        app:layout_constraintEnd_toStartOf="@+id/spinnerSpecies"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/species_input_metadata" />
+        app:layout_constraintTop_toTopOf="@+id/spinnerSpecies" />
 
     <TextView
         android:id="@+id/health_label_high_metadata"

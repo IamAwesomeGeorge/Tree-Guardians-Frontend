@@ -49,4 +49,10 @@
         android:name="com.example.tg.ui.add_tree.AddTreeFragment"
         android:label="@string/add_tree"
         tools:layout="@layout/fragment_add_tree_location" />
+
+    <fragment
+        android:id="@+id/location_next_btn"
+        android:name="com.example.tg.ui.add_tree_metadata.AddTreeMetadataFragment"
+        android:label="@string/add_tree"
+        tools:layout="@layout/fragment_add_tree_metadata" />
 </navigation>
