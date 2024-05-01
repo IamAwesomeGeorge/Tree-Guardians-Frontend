@@ -1,8 +1,11 @@
 package com.example.tg.api
 import com.example.tg.models.SpeciesResponse
 import com.example.tg.models.TreeResponse
+import com.example.tg.models.TreeModel
 import retrofit2.Call
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.POST
 
 
 // This interface will be used to define the methods that relate to API calls
@@ -16,5 +19,8 @@ interface ApiService {
 
     @GET("species")
     fun getSpecies(): Call<SpeciesResponse>
+
+    @POST("tree")
+    fun createTree(@Body postData: TreeModel): Call<TreeResponse>
 
 }

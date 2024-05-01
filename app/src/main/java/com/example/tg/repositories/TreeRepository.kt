@@ -7,6 +7,7 @@ import retrofit2.Response
 import retrofit2.Callback
 // Models
 import com.example.tg.models.TreeResponse
+import com.example.tg.models.TreeModel
 // Logging
 import android.util.Log
 
@@ -30,6 +31,22 @@ class TreeRepository {
                 }
             }
 
+            override fun onFailure(call: Call<TreeResponse>, t: Throwable) {
+                Log.e("API Error", "Failed to fetch tree data", t)
+                callback.onError("Failed to fetch tree data: ${t.message}")
+            }
+        })
+    }
+
+    fun createTree(treeData : TreeModel, callback: TreeDataCallback) {
+        RetrofitClient.instance.createTree(treeData).enqueue(object : Callback<TreeResponse> {
+            override fun onResponse(call: Call<TreeResponse>, response: Response<TreeResponse>) {
+                if (response.isSuccessful) {
+                    Log.i("Success", "TREE ADDED")
+                } else {
+                    Log.e("API Error", "Failed to fetch tree data")
+                }
+            }
             override fun onFailure(call: Call<TreeResponse>, t: Throwable) {
                 Log.e("API Error", "Failed to fetch tree data", t)
                 callback.onError("Failed to fetch tree data: ${t.message}")

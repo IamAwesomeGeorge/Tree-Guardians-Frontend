@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="species_options">
-        <item>All Species</item>
-        <item>Oak</item>
-        <item>Maple</item>
+        <item>LOADING SPECIES…</item>
     </string-array>
     <string-array name="health_options">
         <item>All Statuses</item>

@@ -22,14 +22,14 @@ class SpeciesRepository {
                     }
                 } else {
                     val errorBody = response.errorBody()?.string()
-                    Log.e("API Error", "Failed to fetch tree data: $errorBody")
-                    callback.onError("Failed to fetch tree data: $errorBody")
+                    Log.e("API Error", "Failed to fetch species data: $errorBody")
+                    callback.onError("Failed to fetch species data: $errorBody")
                 }
             }
 
             override fun onFailure(call: Call<SpeciesResponse>, t: Throwable) {
-                Log.e("API Error", "Failed to fetch tree data", t)
-                callback.onError("Failed to fetch tree data: ${t.message}")
+                Log.e("API Error", "Failed to fetch species data", t)
+                callback.onError("Failed to fetch species data: ${t.message}")
             }
         })
     }

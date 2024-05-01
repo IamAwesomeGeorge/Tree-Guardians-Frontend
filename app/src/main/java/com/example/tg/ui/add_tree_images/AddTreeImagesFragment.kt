@@ -1,4 +1,4 @@
-package com.example.tg.ui.add_tree_metadata
+package com.example.tg.ui.add_tree_images
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -18,6 +18,7 @@ import com.example.tg.databinding.FragmentAddTreeMetadataBinding
 import com.google.android.gms.maps.MapView
 import kotlinx.coroutines.launch
 import androidx.fragment.app.viewModels
+import com.example.tg.databinding.FragmentAddTreeImagesBinding
 import com.example.tg.models.SpeciesModel
 import com.example.tg.models.TreeAdditionModel
 import com.example.tg.models.TreeModel
@@ -25,17 +26,17 @@ import com.example.tg.repositories.SpeciesDataCallback
 import com.example.tg.repositories.SpeciesRepository
 import com.example.tg.repositories.TreeDataCallback
 import com.example.tg.repositories.TreeRepository
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.LatLng
 
 
-class AddTreeMetadataFragment : Fragment() {
+class AddTreeImagesFragment : Fragment() {
     // TODO: Rename and change types of parameters
-    private lateinit var get_location_btn: Button
-    private lateinit var next_btn: Button
+    private lateinit var finish_btn: Button
     private lateinit var prev_btn: Button
-    private lateinit var species_spinner: Spinner
+    private lateinit var treeRepository: TreeRepository
 
-    private lateinit var addTreeMapFragment: MapView
-    private lateinit var speciesRepository: SpeciesRepository
 
     private var location_lat:Double = 51.88201959762641
     private var location_lon:Double = -2.0511212095032993
@@ -51,7 +52,7 @@ class AddTreeMetadataFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = FragmentAddTreeMetadataBinding.inflate(inflater, container, false)
+        val binding = FragmentAddTreeImagesBinding.inflate(inflater, container, false)
         val root: View = binding.root
         arguments?.let {
             val pair = it.getSerializable("locationPair") as? Pair<*, *>
@@ -62,21 +63,15 @@ class AddTreeMetadataFragment : Fragment() {
             }
         }
 
-        next_btn = binding.root.findViewById<Button>(R.id.metadata_next_btn)
-        prev_btn = binding.root.findViewById<Button>(R.id.metadata_prev_btn)
-        species_spinner = binding.root.findViewById<Spinner>(R.id.spinnerSpecies)
+        finish_btn = binding.root.findViewById<Button>(R.id.image_add_next_btn)
+        prev_btn = binding.root.findViewById<Button>(R.id.image_add_prev_btn)
 
         // Get spinner
 
 
 
-        val viewModel: TreeAdditionModel by viewModels()
-        val pair = Pair(location_lat, location_lon)
-        val bundle = Bundle()
-        bundle.putSerializable("locationPair", pair)
-        findNavController().previousBackStackEntry?.savedStateHandle?.set("bundle_key", bundle)
 
-        speciesRepository = SpeciesRepository()
+        /*speciesRepository = SpeciesRepository()
         speciesRepository.getAllSpecies(object : SpeciesDataCallback {
             override fun onSuccess(species: List<SpeciesModel>) {
                 val speciesUnique = species.map { it.species }.toSet().toList().filter { it != "UNKNOWN" }
@@ -88,42 +83,44 @@ class AddTreeMetadataFragment : Fragment() {
             override fun onError(errorMessage: String) {
                 Log.e("Tree Fetch Error", errorMessage)
             }
-        })
+        })*/
 
 
 
 
         prev_btn.setOnClickListener {
-            findNavController().popBackStack(R.id.add_tree_fab, false)
+            findNavController().popBackStack(R.id.location_next_btn, false)
         }
 
-        val pair_initial = Pair(location_lat, location_lon)
-        bundle.putSerializable("locationPair", pair_initial)
-
-        next_btn.setOnClickListener {
-            findNavController().navigate(R.id.metadata_next_btn, bundle)
+        finish_btn.setOnClickListener {
+           addTree()
         }
-
-
-
-
-
-
-
-
-
-
-
-
 
         return root
     }
 
+    private fun addTree() {
+        val treeData = TreeModel(
+            id=0,
+            creationDate = "",
+            idUser = "11111111-1111-1111-1111-111111111111",
+            species="UNKNOWN",
+            latitude=51.878234,
+            longitude=-2.039864,
+            healthStatus="HEALTHY",
+            circumference=2.1,
+            planted="",
+            height=2,
+            isDeleted=0
+        )
 
+        treeRepository = TreeRepository()
+        treeRepository.createTree(treeData) {
+            result ->
+                result.onSucess {}
+        }
 
-
-
-
+    }
 
 
 }

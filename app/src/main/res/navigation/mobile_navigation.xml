@@ -56,4 +56,11 @@
         android:label="@string/add_tree"
         tools:layout="@layout/fragment_add_tree_metadata" />
 
+
+    <fragment
+        android:id="@+id/metadata_next_btn"
+        android:name="com.example.tg.ui.add_tree_images.AddTreeImagesFragment"
+        android:label="@string/add_tree"
+        tools:layout="@layout/fragment_add_tree_images" />
+
 </navigation>
