@@ -133,7 +133,6 @@ class AddTreeImagesFragment : Fragment() {
         })
     }
 
-    }
-
-
 }
+
+
