@@ -10,6 +10,8 @@ import com.google.android.gms.maps.model.MarkerOptions
 import Location
 import android.util.Log
 import android.widget.ArrayAdapter
+import android.widget.CheckBox
+import android.widget.EditText
 import android.widget.Spinner
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -36,6 +38,12 @@ class AddTreeMetadataFragment : Fragment() {
 
     private lateinit var addTreeMapFragment: MapView
     private lateinit var speciesRepository: SpeciesRepository
+
+    private lateinit var species_selection: String
+    private lateinit var height_selection: String
+    private lateinit var circ_selection: String
+    private lateinit var health_flag: String
+
 
     private var location_lat:Double = 51.88201959762641
     private var location_lon:Double = -2.0511212095032993
@@ -64,13 +72,19 @@ class AddTreeMetadataFragment : Fragment() {
 
         next_btn = binding.root.findViewById<Button>(R.id.metadata_next_btn)
         prev_btn = binding.root.findViewById<Button>(R.id.metadata_prev_btn)
+
+        prev_btn = binding.root.findViewById<Button>(R.id.metadata_prev_btn)
         species_spinner = binding.root.findViewById<Spinner>(R.id.spinnerSpecies)
+
+        val checkBox: CheckBox = binding.root.findViewById(R.id.healthCheckBox)
+        val heightEditText: EditText = binding.root.findViewById(R.id.height_input_metadata)
+        val circEditText: EditText = binding.root.findViewById(R.id.circ_input_metadata)
+
 
         // Get spinner
 
 
 
-        val viewModel: TreeAdditionModel by viewModels()
         val pair = Pair(location_lat, location_lon)
         val bundle = Bundle()
         bundle.putSerializable("locationPair", pair)
@@ -97,10 +111,28 @@ class AddTreeMetadataFragment : Fragment() {
             findNavController().popBackStack(R.id.add_tree_fab, false)
         }
 
-        val pair_initial = Pair(location_lat, location_lon)
-        bundle.putSerializable("locationPair", pair_initial)
+
 
         next_btn.setOnClickListener {
+            val speciesFilter = binding.spinnerSpecies.selectedItem.toString()
+
+            val health_checked: Boolean = checkBox.isChecked
+
+            val heightString: String = heightEditText.text.toString()
+            val height: Float = if (heightString.isNotEmpty()) heightString.toFloat() else 0.0f
+
+            val circString: String = circEditText.text.toString()
+            val circ: Float = if (circString.isNotEmpty()) circString.toFloat() else 0.0f
+
+
+            Log.d("PREPEAREPSSS", "LOCATION PASSED: $location_lat $location_lon SP: $speciesFilter H: $height C: $circ HEALTH: $health_checked")
+
+            val pair_initial = Pair(location_lat, location_lon)
+            bundle.putSerializable("locationPair", pair_initial)
+            bundle.putString("speciesFilter", speciesFilter)
+            bundle.putBoolean("healthChecked", health_checked)
+            bundle.putFloat("height", height)
+            bundle.putFloat("circ", circ)
             findNavController().navigate(R.id.metadata_next_btn, bundle)
         }
 

@@ -19,6 +19,7 @@ import com.example.tg.databinding.FragmentAddTreeMetadataBinding
 import com.google.android.gms.maps.MapView
 import kotlinx.coroutines.launch
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavOptions
 import com.example.tg.databinding.FragmentAddTreeImagesBinding
 import com.example.tg.models.SpeciesModel
 import com.example.tg.models.TreeAdditionModel
@@ -42,6 +43,10 @@ class AddTreeImagesFragment : Fragment() {
 
     private var location_lat:Double = 51.88201959762641
     private var location_lon:Double = -2.0511212095032993
+    private var speciesFilter:String = "UNKNOWN"
+    private var height:Float = 1.0F
+    private var circ:Float = 1.0F
+    private var healthStatus:String = "AVERAGE"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,8 +66,17 @@ class AddTreeImagesFragment : Fragment() {
             pair?.let { (lat, lon) ->
                 location_lat = lat as Double
                 location_lon = lon as Double
-                Log.d("PASSTHROUGH", "LOCATION PASSED: $lat $lon")
+
+                Log.d("PASSTHROUGHIMAGES", "LOCATION PASSED: $lat $lon")
             }
+            speciesFilter = it.getString("speciesFilter").toString()
+            healthStatus = if(it.getBoolean("healthChecked")) {
+                "POOR"
+            } else {
+                "HEALTHY"
+            }
+            height = it.getFloat("height")
+            circ = it.getFloat("circ")
         }
 
         finish_btn = binding.root.findViewById<Button>(R.id.image_add_next_btn)
@@ -95,24 +109,31 @@ class AddTreeImagesFragment : Fragment() {
         }
 
         finish_btn.setOnClickListener {
-           addTree()
+            addTree()
+            val navOptions = NavOptions.Builder()
+                .setPopUpTo(R.id.nav_map, true)
+                .build()
+
+            findNavController().navigate(R.id.nav_map, null, navOptions)
+
         }
 
         return root
     }
 
     private fun addTree() {
+
         val treeData = TreeModel(
             id=0,
             creationDate = "",
             idUser = "11111111-1111-1111-1111-111111111111",
-            species="UNKNOWN",
-            latitude=51.878234,
-            longitude=-2.039864,
-            healthStatus="HEALTHY",
-            circumference=2.1,
+            species=speciesFilter,
+            latitude=location_lat,
+            longitude=location_lon,
+            healthStatus=healthStatus,
+            circumference= circ.toDouble(),
             planted="",
-            height=2,
+            height= height.toInt(),
             isDeleted=0
         )
 
@@ -120,14 +141,26 @@ class AddTreeImagesFragment : Fragment() {
         treeRepository.createTree(treeData, object : TreeDataCallback {
             override fun onSuccess(trees: List<TreeModel>) {
                 activity?.runOnUiThread {
-                    Toast.makeText(context, "Tree added successfully!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Tree added successfully!", Toast.LENGTH_SHORT).show()
                     // Add navigation back to map page
+                    val navOptions = NavOptions.Builder()
+                        .setPopUpTo(R.id.nav_map, true)
+                        .build()
+
+                    findNavController().navigate(R.id.nav_map, null, navOptions)
+
                 }
             }
 
             override fun onError(errorMessage: String) {
                 activity?.runOnUiThread {
                     Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
+                    val navOptions = NavOptions.Builder()
+                        .setPopUpTo(R.id.nav_map, true)
+                        .build()
+
+                    findNavController().navigate(R.id.nav_map, null, navOptions)
+
                 }
             }
         })

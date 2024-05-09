@@ -120,10 +120,10 @@
         android:layout_marginTop="128dp"
         android:text="@string/previous"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+        app:layout_constraintTop_toBottomOf="@+id/healthCheckBox" />
 
     <CheckBox
-        android:id="@+id/checkBox"
+        android:id="@+id/healthCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@+id/health_label_main_metadata"
