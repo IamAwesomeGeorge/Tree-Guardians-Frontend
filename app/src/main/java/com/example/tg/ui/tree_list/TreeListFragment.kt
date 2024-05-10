@@ -119,12 +119,14 @@ class TreeListFragment : Fragment() {
     private fun setProximity() {
         val proximityFilter = binding.spinnerProximity.selectedItem.toString()
         proximity = when (proximityFilter) {
-            "50m" -> 50.0
-            "100m" -> 100.0
-            "200m" -> 200.0
-            "300m" -> 300.0
-            "400m" -> 400.0
-            "500m" -> 500.0
+            "50m" -> 0.05
+            "100m" -> 0.1
+            "200m" -> 0.2
+            "300m" -> 0.3
+            "400m" -> 0.4
+            "500m" -> 0.5
+            "1km" -> 1.0
+            "1.5km" -> 1.5
             else -> {
                 100000.0
             }
@@ -157,7 +159,7 @@ class TreeListFragment : Fragment() {
             matchesFilter
         }
 
-        val h = Haversine(latitude, longitude)
+        var h = Haversine(latitude, longitude)
         filteredList = filteredList.filter { tree ->
             val h2 = Haversine(tree.latitude, tree.longitude)
             Log.d("INFO", h.getDistance(h2).toString())
