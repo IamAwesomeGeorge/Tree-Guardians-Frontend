@@ -152,18 +152,15 @@ class TreeListFragment : Fragment() {
 
         Log.d("LOCTEST", "LOCATION RECEIVED: $latitude $longitude")
 
+        var h = Haversine(latitude, longitude)
+        h = Haversine(51.87509853, -2.06647832)
         var filteredList = allTrees.filter { tree ->
+            val h2 = Haversine(tree.latitude, tree.longitude)
             val matchesFilter =
                 (speciesFilter == "All Species" || tree.species == speciesFilter.uppercase()) &&
-                        (healthFilter == "All Statuses" || tree.healthStatus == healthFilter.uppercase())
+                        (healthFilter == "All Statuses" || tree.healthStatus == healthFilter.uppercase()) &&
+                        (h.getDistance(h2) < proximity)
             matchesFilter
-        }
-
-        var h = Haversine(latitude, longitude)
-        filteredList = filteredList.filter { tree ->
-            val h2 = Haversine(tree.latitude, tree.longitude)
-            Log.d("INFO", h.getDistance(h2).toString())
-            h.getDistance(h2) < proximity
         }
 
         treeListAdapter.updateData(filteredList)
