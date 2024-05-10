@@ -11,11 +11,13 @@ import com.example.tg.models.TreeModel
 import android.util.Log
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Switch
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tg.repositories.TreeDataCallback
 import com.example.tg.repositories.TreeRepository
 import com.example.tg.ui.adapters.TreeListAdapter
+import com.example.tg.util.Haversine
 import kotlinx.coroutines.launch
 
 class TreeListFragment : Fragment() {
@@ -24,6 +26,7 @@ class TreeListFragment : Fragment() {
     private var allTrees: List<TreeModel> = listOf() // Maintains the list of all trees for filtering
     private lateinit var treeListAdapter: TreeListAdapter
     private lateinit var treeRepository: TreeRepository
+    private var proximity: Double = 100000.0;
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -70,6 +73,7 @@ class TreeListFragment : Fragment() {
         binding.spinnerProximity.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
                 if (view != null) {
+                    setProximity()
                     filterTrees()
                 }
             }
@@ -112,10 +116,24 @@ class TreeListFragment : Fragment() {
         binding.spinnerHealth.adapter = adapter
     }
 
+    private fun setProximity() {
+        val proximityFilter = binding.spinnerProximity.selectedItem.toString()
+        proximity = when (proximityFilter) {
+            "50m" -> 50.0
+            "100m" -> 100.0
+            "200m" -> 200.0
+            "300m" -> 300.0
+            "400m" -> 400.0
+            "500m" -> 500.0
+            else -> {
+                100000.0
+            }
+        }
+    }
+
     private fun filterTrees() {
         val speciesFilter = binding.spinnerSpecies.selectedItem.toString()
         val healthFilter = binding.spinnerHealth.selectedItem.toString()
-        val proximityFilter = binding.spinnerProximity.selectedItem.toString()
         var latitude: Double = 0.0
         var longitude: Double = 0.0
 
@@ -132,12 +150,20 @@ class TreeListFragment : Fragment() {
 
         Log.d("LOCTEST", "LOCATION RECEIVED: $latitude $longitude")
 
-        val filteredList = allTrees.filter { tree ->
-            val matchesSpecies =
+        var filteredList = allTrees.filter { tree ->
+            val matchesFilter =
                 (speciesFilter == "All Species" || tree.species == speciesFilter.uppercase()) &&
                         (healthFilter == "All Statuses" || tree.healthStatus == healthFilter.uppercase())
-            matchesSpecies
+            matchesFilter
         }
+
+        val h = Haversine(latitude, longitude)
+        filteredList = filteredList.filter { tree ->
+            val h2 = Haversine(tree.latitude, tree.longitude)
+            Log.d("INFO", h.getDistance(h2).toString())
+            h.getDistance(h2) < proximity
+        }
+
         treeListAdapter.updateData(filteredList)
     }
 
