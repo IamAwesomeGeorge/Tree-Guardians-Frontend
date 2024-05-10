@@ -22,12 +22,12 @@
         android:id="@+id/height_input_metadata"
         android:layout_width="100dp"
         android:layout_height="0dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         android:ems="10"
         android:inputType="numberDecimal"
         android:text="1.0"
         app:layout_constraintStart_toStartOf="@+id/spinnerSpecies"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerSpecies" />
+        app:layout_constraintTop_toBottomOf="@+id/customSpecies" />
 
     <EditText
         android:id="@+id/circ_input_metadata"
@@ -72,12 +72,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/metadata_request_subtitle" />
 
+    <EditText
+        android:id="@+id/customSpecies"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:hint="Enter custom species"
+        android:imeOptions="actionDone"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="@+id/spinnerSpecies"
+        app:layout_constraintStart_toStartOf="@+id/spinnerSpecies"
+        app:layout_constraintTop_toBottomOf="@id/spinnerSpecies"
+        android:autofillHints="" />
+
     <TextView
         android:id="@+id/species_label_metadata"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/species"
-        app:layout_constraintBottom_toBottomOf="@+id/spinnerSpecies"
+        app:layout_constraintBottom_toBottomOf="@+id/customSpecies"
         app:layout_constraintEnd_toStartOf="@+id/spinnerSpecies"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/spinnerSpecies" />

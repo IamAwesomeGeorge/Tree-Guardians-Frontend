@@ -8,11 +8,16 @@ import android.widget.Button
 import com.example.tg.R
 import com.google.android.gms.maps.model.MarkerOptions
 import Location
+import android.os.Build
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.Spinner
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.tg.databinding.FragmentAddTreeLocationBinding
@@ -43,6 +48,10 @@ class AddTreeMetadataFragment : Fragment() {
     private lateinit var height_selection: String
     private lateinit var circ_selection: String
     private lateinit var health_flag: String
+
+    private lateinit var speciesCustomEntry: EditText
+    private lateinit var spinner: Spinner
+    private lateinit var adapter: ArrayAdapter<String>
 
 
     private var location_lat:Double = 51.88201959762641
@@ -75,6 +84,7 @@ class AddTreeMetadataFragment : Fragment() {
 
         prev_btn = binding.root.findViewById<Button>(R.id.metadata_prev_btn)
         species_spinner = binding.root.findViewById<Spinner>(R.id.spinnerSpecies)
+        speciesCustomEntry = binding.root.findViewById<EditText>(R.id.customSpecies)
 
         val checkBox: CheckBox = binding.root.findViewById(R.id.healthCheckBox)
         val heightEditText: EditText = binding.root.findViewById(R.id.height_input_metadata)
@@ -92,17 +102,52 @@ class AddTreeMetadataFragment : Fragment() {
 
         speciesRepository = SpeciesRepository()
         speciesRepository.getAllSpecies(object : SpeciesDataCallback {
+            @RequiresApi(Build.VERSION_CODES.O)
             override fun onSuccess(species: List<SpeciesModel>) {
                 val speciesUnique = species.map { it.species }.toSet().toList().filter { it != "UNKNOWN" }
-                val speciesValues = listOf("UNKNOWN") + speciesUnique
+                val speciesValues = listOf("UNKNOWN") + speciesUnique + listOf("OTHER")
                 val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, speciesValues)
                 binding.spinnerSpecies.adapter = adapter
+                // Convert the list to an array
+                val hintsArray = speciesUnique.toTypedArray()
+                speciesCustomEntry.setAutofillHints(*hintsArray)
             }
 
             override fun onError(errorMessage: String) {
                 Log.e("Tree Fetch Error", errorMessage)
             }
         })
+
+        // Set up TextChangedListener for the EditText
+        speciesCustomEntry.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // Not needed
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // Check if EditText has text, and select last item in Spinner if it does
+                if (s?.isNotEmpty() == true) {
+                    species_spinner.setSelection(species_spinner.count - 1)
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                // Not needed
+            }
+        })
+
+
+
+        species_spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                // Clear the text in the EditText box when an item is selected in the Spinner
+                speciesCustomEntry.setText("")
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                // Handle case when nothing is selected
+            }
+        }
 
 
 
@@ -114,7 +159,14 @@ class AddTreeMetadataFragment : Fragment() {
 
 
         next_btn.setOnClickListener {
-            val speciesFilter = binding.spinnerSpecies.selectedItem.toString()
+            var speciesFilter = "UNKNOWN"
+
+            if (speciesCustomEntry.text.isNotEmpty()) {
+                speciesFilter = speciesCustomEntry.text.toString()
+                // Do something with textValue
+            } else {
+                speciesFilter = binding.spinnerSpecies.selectedItem.toString()
+            }
 
             val health_checked: Boolean = checkBox.isChecked
 

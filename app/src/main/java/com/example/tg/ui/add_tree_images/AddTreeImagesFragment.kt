@@ -8,10 +8,19 @@ import android.widget.Button
 import com.example.tg.R
 import com.google.android.gms.maps.model.MarkerOptions
 import Location
+import android.Manifest
+import android.app.Activity.RESULT_OK
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.provider.MediaStore
 import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.tg.databinding.FragmentAddTreeLocationBinding
@@ -32,12 +41,16 @@ import com.example.tg.repositories.TreeRepository
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import java.io.ByteArrayOutputStream
 
 
 class AddTreeImagesFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private lateinit var finish_btn: Button
     private lateinit var prev_btn: Button
+    private lateinit var camera_btn: Button
     private lateinit var treeRepository: TreeRepository
 
 
@@ -48,11 +61,17 @@ class AddTreeImagesFragment : Fragment() {
     private var circ:Float = 1.0F
     private var healthStatus:String = "AVERAGE"
 
+
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // Add any initialization logic here
         // For example, initialize variables or retrieve arguments from savedInstanceState
     }
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -81,6 +100,25 @@ class AddTreeImagesFragment : Fragment() {
 
         finish_btn = binding.root.findViewById<Button>(R.id.image_add_next_btn)
         prev_btn = binding.root.findViewById<Button>(R.id.image_add_prev_btn)
+        prev_btn = binding.root.findViewById<Button>(R.id.image_add_prev_btn)
+
+
+        if (ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.CAMERA
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.CAMERA), 100)
+        } else {
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                arrayOf(Manifest.permission.CAMERA),
+                1
+            )
+        }
+
+
+
 
         // Get spinner
 
