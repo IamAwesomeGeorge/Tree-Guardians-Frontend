@@ -35,8 +35,8 @@
     <string name="healthy">Healthy</string>
     <string name="walk_to_base_msg">Please walk to the base of the tree\nThen press GET LOCATION</string>
     <string name="next">NEXT</string>
-    <string name="circumferance">Circumference</string>
-    <string name="height">Height</string>
+    <string name="circumferance">Circumference (cm)</string>
+    <string name="height">Height (M)</string>
     <string name="please_enter_more_details_about_the_tree">Please enter details about the tree:</string>
     <string name="don_t_worry_if_you_cant_enter_everything">Don\'t worry if you can\'t enter everything</string>
     <string name="previous">PREVIOUS</string>
