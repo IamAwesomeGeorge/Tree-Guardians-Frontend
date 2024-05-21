@@ -117,31 +117,6 @@ class AddTreeImagesFragment : Fragment() {
             )
         }
 
-
-
-
-        // Get spinner
-
-
-
-
-        /*speciesRepository = SpeciesRepository()
-        speciesRepository.getAllSpecies(object : SpeciesDataCallback {
-            override fun onSuccess(species: List<SpeciesModel>) {
-                val speciesUnique = species.map { it.species }.toSet().toList().filter { it != "UNKNOWN" }
-                val speciesValues = listOf("UNKNOWN") + speciesUnique
-                val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, speciesValues)
-                binding.spinnerSpecies.adapter = adapter
-            }
-
-            override fun onError(errorMessage: String) {
-                Log.e("Tree Fetch Error", errorMessage)
-            }
-        })*/
-
-
-
-
         prev_btn.setOnClickListener {
             findNavController().popBackStack(R.id.location_next_btn, false)
         }
@@ -161,6 +136,7 @@ class AddTreeImagesFragment : Fragment() {
 
     private fun addTree() {
 
+        // id_user is set to a default value for testing.
         val treeData = TreeModel(
             id=0,
             creationDate = "",

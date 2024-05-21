@@ -10,8 +10,6 @@ import com.google.android.gms.location.LocationServices
 
 import kotlinx.coroutines.*
 
-
-
 object Location {
     public val DEFAULT_LAT = 51.88201959762641
     public val DEFAULT_LON = -2.0511212095032993
@@ -38,8 +36,6 @@ object Location {
                 LOCATION_PERMISSION_REQUEST_CODE
             )
         }
-
-
 
         fusedLocationClient.lastLocation
             .addOnSuccessListener { location ->

@@ -92,9 +92,6 @@ class AddTreeMetadataFragment : Fragment() {
 
 
         // Get spinner
-
-
-
         val pair = Pair(location_lat, location_lon)
         val bundle = Bundle()
         bundle.putSerializable("locationPair", pair)
@@ -136,8 +133,6 @@ class AddTreeMetadataFragment : Fragment() {
             }
         })
 
-
-
         species_spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 // Clear the text in the EditText box when an item is selected in the Spinner
@@ -148,9 +143,6 @@ class AddTreeMetadataFragment : Fragment() {
                 // Handle case when nothing is selected
             }
         }
-
-
-
 
         prev_btn.setOnClickListener {
             findNavController().popBackStack(R.id.add_tree_fab, false)
@@ -188,26 +180,6 @@ class AddTreeMetadataFragment : Fragment() {
             findNavController().navigate(R.id.metadata_next_btn, bundle)
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
         return root
     }
-
-
-
-
-
-
-
-
 }
